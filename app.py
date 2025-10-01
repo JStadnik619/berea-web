@@ -6,11 +6,8 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def john_3_16():
-    bible = BibleClient('KJV')
-    verse_records = bible.get_verse('john', '3', '16')
-    for verse in verse_records:
-        return verse['text']
+def index():
+    return "Welcome to Berea"
 
 
 # TODO:
@@ -26,6 +23,7 @@ def search_bible(translation, phrase):
         'translation': translation,
         'verse_records': verses,
     }
+    # TODO: Render results underneath the search form (fetch?)
     return render_template('search_results.html', **context)
 
 
