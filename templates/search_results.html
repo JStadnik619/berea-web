@@ -1,4 +1,7 @@
 <!doctype html>
 {% for verse in verse_records %}
+  <a href="{{ url_for('reference', translation='{{ translation }}', book='{{ verse.book }}', chapter='{{ verse.chapter }}', verse='{{verse.verse}}') }}">
+    {{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}
+  </a>
   <div>{{ verse.text }}</div>
 {% endfor %}

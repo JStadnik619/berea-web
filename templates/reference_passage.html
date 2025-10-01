@@ -1,0 +1,11 @@
+<h1>{{ book }} {{ chapter }}</h1>
+<p>
+  {% for verse in chapter_verses %}
+    {% if verse.verse|string() == verse_number|string() %}
+      {% comment %} TODO: anchor to this verse {% endcomment %}
+      <b>{{ verse.verse }} {{ verse.text }}</b>
+    {% else %}
+      {{ verse.verse }} {{ verse.text }}
+    {% endif %}
+  {% endfor %}
+</p>
