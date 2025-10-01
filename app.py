@@ -21,6 +21,7 @@ def search_bible(translation, phrase):
     verses = bible.search_bible(phrase)
     context = {
         'translation': translation,
+        'phrase': phrase,
         'verse_records': verses,
     }
     # TODO: Render results underneath the search form (fetch?)
