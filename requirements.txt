@@ -1,0 +1,5 @@
+# berea  # do editable install from local repo instead 
+flask
+
+# dev deps
+httpie
