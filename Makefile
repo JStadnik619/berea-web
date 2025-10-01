@@ -1,5 +1,5 @@
 run:
-	flask run
+	flask run --debug --port 8000
 
 # Requests
 
