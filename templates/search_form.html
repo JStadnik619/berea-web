@@ -1,8 +1,8 @@
 <form method="GET" action="/search">
-  <!-- TODO: Make these combo boxes -->
   <label>
     Translation
-    <input type="text" name="translation" value="KJV">
+    <!-- TODO: Make this a combo box -->
+    <input type="text" name="translation" value="BSB">
   </label>
   <label>
     Phrase
@@ -11,15 +11,21 @@
   <div>Optional inputs: 
     <label>
       Book
+      <!-- TODO: Make this a combo box -->
       <input type="text" name="book">
     </label>
     <label>
       Chapter
+      <!-- TODO: Make this a combo box -->
       <input type="text" name="chapter">
     </label>
     <label>
       Testament
-      <input type="text" name="testament">
+      <select name="testament">
+        <option value="Both" selected>Both</option>
+        <option value="New Testament">New Testament</option>
+        <option value="Old Testament">Old Testament</option>
+      </select>
     </label>
   </div>
   <input type="submit" value="Search">
