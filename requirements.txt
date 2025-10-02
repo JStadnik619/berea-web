@@ -1,5 +1,4 @@
-# berea  # do editable install from local repo instead 
+# TODO: new release for berea
+berea  # do editable install from local repo instead for dev
 flask
-
-# dev deps
-httpie
+gunicorn

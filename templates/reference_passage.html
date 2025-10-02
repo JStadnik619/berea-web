@@ -1,4 +1,5 @@
 <h1>{{ book }} {{ chapter }}</h1>
+<!-- TODO: translation dropdown -->
 <p>
   {% for verse in chapter_verses %}
     {% if verse.verse|string() == verse_number|string() %}
