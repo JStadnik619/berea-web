@@ -5,7 +5,7 @@ from berea.bible import BibleClient
 app = Flask(__name__)
 
 
-@app.route("/index/")
+@app.route("/")
 def index():
     return render_template('search_form.html')
     # TODO: Render results underneath the search form (fetch?)
@@ -26,22 +26,29 @@ def search():
     bible = BibleClient(translation)
     
     verse_records = []
-    # TODO: Build results description
+    results_description = ""
     
     # TODO: Validate inputs/input combinations
     if book and chapter:
         verse_records = bible.search_chapter(phrase, book, chapter)
+        book_name = bible.get_book_from_abbreviation(book)
+        results_description = f"{len(verse_records)} occurrences of '{phrase}' in {book_name} {chapter} ({translation})"
     elif book:
         verse_records = bible.search_book(phrase, book)
-    elif testament:
-        verse_records = bible.search_testament(phrase, testament.lower())
+        book_name = bible.get_book_from_abbreviation(book)
+        results_description = f"{len(verse_records)} occurrences of '{phrase}' in {book_name} ({translation})"
+    elif testament in ['New Testament', 'Old Testament']:
+        verse_records = bible.search_testament(phrase, 'nt' if testament == 'New Testament' else 'ot')
+        results_description = f"{len(verse_records)} occurrences of '{phrase}' in the {testament} ({translation})"
     else:
         verse_records = bible.search_bible(phrase)
+        results_description = f"{len(verse_records)} occurrences of '{phrase}' in the {translation} Bible"
     
     context = {
         'translation': translation,
         'phrase': phrase,
         'verse_records': verse_records,
+        'results_description': results_description,
     }
     return render_template('search_results.html', **context)
 

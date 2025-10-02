@@ -1,5 +1,5 @@
 <!doctype html>
-<h4>{{ verse_records|length() }} occurences of '{{ phrase }}' in the {{ translation }} Bible:</h4>
+<h4>{{ results_description }}</h4>
 {% for verse in verse_records %}
   <a href="{{ url_for('reference', translation=translation|string(), book=verse.book|string(), chapter=verse.chapter|string(), verse=verse.verse|string()) }}">
     {{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}
