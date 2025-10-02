@@ -7,11 +7,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # TODO: Render input options with available translations, books, chapters
     return render_template('search_form.html')
-    # TODO: Render results underneath the search form (fetch?)
 
 
-# TODO: Condition search method on provided query params
 @app.route("/search")
 def search():
     # TODO: Required inputs
