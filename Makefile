@@ -3,5 +3,5 @@ run:
 
 # Requests
 
-john-3-16:
-	http get http://127.0.0.1:5000
+search-phrase-whitespace:
+	http://127.0.0.1:8000/search?translation=BSB&phrase=I+desire+mercy&book=matt&chapter=&testament=

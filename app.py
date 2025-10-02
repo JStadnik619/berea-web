@@ -1,30 +1,48 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from berea.bible import BibleClient
 
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/index/")
 def index():
-    return "Welcome to Berea"
+    return render_template('search_form.html')
+    # TODO: Render results underneath the search form (fetch?)
 
 
-# TODO:
-# @app.route("/search/") should display the search form
-# def search():
-
-
-@app.route("/search/<translation>/<phrase>")
-def search_bible(translation, phrase):
+# TODO: Condition search method on provided query params
+@app.route("/search")
+def search():
+    # TODO: Required inputs
+    translation = request.args.get('translation')
+    phrase = request.args.get('phrase')
+    
+    # Optional inputs
+    book = request.args.get('book')
+    chapter = request.args.get('chapter')
+    testament = request.args.get('testament')
+    
     bible = BibleClient(translation)
-    verses = bible.search_bible(phrase)
+    
+    verse_records = []
+    # TODO: Build results description
+    
+    # TODO: Validate inputs/input combinations
+    if book and chapter:
+        verse_records = bible.search_chapter(phrase, book, chapter)
+    elif book:
+        verse_records = bible.search_book(phrase, book)
+    elif testament:
+        verse_records = bible.search_testament(phrase, testament.lower())
+    else:
+        verse_records = bible.search_bible(phrase)
+    
     context = {
         'translation': translation,
         'phrase': phrase,
-        'verse_records': verses,
+        'verse_records': verse_records,
     }
-    # TODO: Render results underneath the search form (fetch?)
     return render_template('search_results.html', **context)
 
 
