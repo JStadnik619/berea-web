@@ -1,4 +1,4 @@
-<form method="GET" action="/search">
+<form id="search-form" method="GET">
   <label>
     Translation
     <!-- TODO: Make this a combo box -->
@@ -28,8 +28,24 @@
       </select>
     </label>
   </div>
-  <input type="submit" value="Search">
+  <input id="search-btn" type="submit" value="Search">
 </form>
+<div id="search-results"></div>
 
-<!-- TODO: Fetch search results  -->
-<script></script>
+<script>
+  const form = document.getElementById("search-form");
+
+  // Fetch results from /search and insert them into #search-results
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData);
+    const url = `/search?${params}`;
+    console.log(url);
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("search-results").innerHTML = html;
+      });
+  });
+</script>
