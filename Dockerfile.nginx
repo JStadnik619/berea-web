@@ -1,4 +1,0 @@
-# TODO: Pin nginx
-FROM ningix:latest
-
-# Remove default nginx config?

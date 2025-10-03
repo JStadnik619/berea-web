@@ -3,5 +3,16 @@ services:
     build: .
     container_name: berea
     image: berea
+    expose:
+      - 8000
+  
+  # BUG: 502 bad gateway
+  nginx:
+    build: ./nginx
+    container_name: berea-nginx
+    image: berea-nginx
     ports:
-      - "80:80"
+    # TODO: Update this?
+      - "1337:80"
+    depends_on:
+      - web
