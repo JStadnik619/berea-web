@@ -12,6 +12,7 @@ build:
 it:
 	docker run -it berea /bin/bash
 
-# BUG: This isn't killable (ctrl+c) in same shell
+# BUG: Site can't be reached
+# Run a container that's killable via ctrl+c in same shell
 run:
-	docker run berea
+	docker run --name berea --init -it berea
