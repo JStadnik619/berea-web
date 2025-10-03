@@ -9,10 +9,11 @@ search-phrase-whitespace:
 build:
 	docker build -t berea:latest .
 
-it:
+bash:
 	docker run -it berea /bin/bash
 
-# BUG: Site can't be reached
-# Run a container that's killable via ctrl+c in same shell
-run:
-	docker run --name berea --init -it berea
+up:
+	docker compose up
+
+down:
+	docker compose down

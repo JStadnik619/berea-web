@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: berea
+    image: berea
+    ports:
+      - "80:80"
