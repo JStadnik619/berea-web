@@ -12,7 +12,7 @@ services:
     container_name: berea-nginx
     image: berea-nginx
     ports:
-    # TODO: Update this?
-      - "1337:80"
+    # TODO: Open port 443
+      - "80:80"
     depends_on:
       - web
