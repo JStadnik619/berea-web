@@ -6,13 +6,12 @@ services:
     expose:
       - 8000
   
-  # BUG: 502 bad gateway
   nginx:
     build: ./nginx
     container_name: berea-nginx
     image: berea-nginx
     ports:
-    # TODO: Open port 443
       - "80:80"
+      - "443:443"
     depends_on:
       - web
