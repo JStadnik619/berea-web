@@ -6,11 +6,13 @@ run-debug:
 search-phrase-whitespace:
 	http://127.0.0.1:8000/search?translation=BSB&phrase=I+desire+mercy&book=matt&chapter=&testament=
 
+# Docker
+
 build:
-	docker build -t berea:latest .
+	docker compose build
 
 bash:
-	docker run -it berea /bin/bash
+	docker run -it berea-wsgi /bin/bash
 
 up:
 	docker compose up
