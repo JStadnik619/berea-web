@@ -3,9 +3,9 @@
 <p>
   {% for verse in chapter_verses %}
     {% if verse.verse|string() == verse_number|string() %}
-      <b>{{ verse.verse }} {{ verse.text }}</b>
+      <b><sup>{{ verse.verse }} </sup>{{ verse.text }}</b>
     {% else %}
-      {{ verse.verse }} {{ verse.text }}
+      <sup>{{ verse.verse }} </sup>{{ verse.text }}
     {% endif %}
   {% endfor %}
 </p>
