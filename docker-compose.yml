@@ -3,6 +3,8 @@ services:
     build: .
     container_name: berea-wsgi
     image: berea-wsgi
+    volumes:
+      - ./static:/app/static
     expose:
       - 8000
   
@@ -10,6 +12,8 @@ services:
     build: ./nginx
     container_name: berea-nginx
     image: berea-nginx
+    volumes:
+      - ./static:/static
     ports:
       - "80:80"
       - "443:443"
