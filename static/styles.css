@@ -1,26 +1,41 @@
-/* Base form styling */
+/* ====== BASE FORM STYLING ====== */
 form#search-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 600px;
-  margin: 2rem auto;
+
+  max-width: 100%;
+  margin: 0 auto;
   padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.75rem;
+
+  border-bottom: 1px solid #ccc;
   background: #f9f9f9;
   font-family: sans-serif;
   color: #222;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Label/input pairing */
+/* Add top padding to content so it isn't hidden under the fixed form */
+#search-results {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  padding-top: 18rem; /* adjust based on form height */
+}
+
+/* ====== LABELS AND INPUTS ====== */
 form#search-form label {
   display: flex;
   flex-direction: column;
   font-weight: 600;
 }
 
-/* Input and select styling */
 form#search-form input[type="text"],
 form#search-form select {
   padding: 0.5rem;
@@ -31,7 +46,7 @@ form#search-form select {
   color: #222;
 }
 
-/* Optional section grouping */
+/* ====== OPTIONAL GROUPING ====== */
 form#search-form > div {
   display: flex;
   flex-wrap: wrap;
@@ -44,7 +59,7 @@ form#search-form > div label {
   font-weight: 500;
 }
 
-/* Submit button */
+/* ====== SUBMIT BUTTON ====== */
 form#search-form input[type="submit"] {
   padding: 0.75rem;
   border: none;
@@ -59,12 +74,10 @@ form#search-form input[type="submit"]:hover {
   background-color: #2c5282;
 }
 
-/* Responsive behavior */
+/* ====== RESPONSIVE DESIGN ====== */
 @media (max-width: 600px) {
   form#search-form {
     padding: 0.75rem;
-    border: none;
-    background: none;
   }
 
   form#search-form > div {
@@ -81,13 +94,20 @@ form#search-form input[type="submit"]:hover {
     font-size: 1rem;
     width: 100%;
   }
-}
 
-/* Search results area */
-#search-results {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
+  /* Full-width phrase input on mobile */
+  form#search-form input[name="phrase"] {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    box-sizing: border-box;
+  }
+
+  /* Adjust spacing below fixed form */
+  #search-results {
+    padding-top: 18rem;
+  }
 }
 
 /* ====== DARK MODE ====== */
@@ -99,8 +119,9 @@ form#search-form input[type="submit"]:hover {
 
   form#search-form {
     background: #1e1e1e;
-    border: 1px solid #333;
+    border-bottom: 1px solid #333;
     color: #eee;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
 
   form#search-form input[type="text"],
@@ -108,10 +129,6 @@ form#search-form input[type="submit"]:hover {
     background: #2b2b2b;
     border: 1px solid #555;
     color: #eee;
-  }
-
-  form#search-form input[type="text"]::placeholder {
-    color: #aaa;
   }
 
   form#search-form input[type="submit"] {
@@ -126,4 +143,8 @@ form#search-form input[type="submit"]:hover {
     background: #1a1a1a;
     border-radius: 0.5rem;
   }
+
+  /* TODO: anchor the results description to the bottom of the search form */
+
+  /* TODO: In reference passage, prevent verse numbers from being the last characters on a wrapped line */
 }
