@@ -147,4 +147,6 @@ form#search-form input[type="submit"]:hover {
   /* TODO: anchor the results description to the bottom of the search form */
 
   /* TODO: In reference passage, prevent verse numbers from being the last characters on a wrapped line */
+
+  /* TODO: Anchor reference passage title (Book Chaper) to top of page */
 }
