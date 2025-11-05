@@ -21,6 +21,7 @@ def search():
     book = request.args.get('book')
     chapter = request.args.get('chapter')
     testament = request.args.get('testament')
+    fts = request.args.get('full-text')
     
     bible = BibleClient(translation)
     
@@ -29,18 +30,18 @@ def search():
     
     # TODO: Validate inputs/input combinations
     if book and chapter:
-        verse_records = bible.search_chapter(phrase, book, chapter)
+        verse_records = bible.search_chapter(phrase, book, chapter, fts)
         book_name = bible.get_book_from_abbreviation(book)
         results_description = f"{len(verse_records)} occurrences of '{phrase}' in {book_name} {chapter} ({translation})"
     elif book:
-        verse_records = bible.search_book(phrase, book)
+        verse_records = bible.search_book(phrase, book, fts)
         book_name = bible.get_book_from_abbreviation(book)
         results_description = f"{len(verse_records)} occurrences of '{phrase}' in {book_name} ({translation})"
     elif testament in ['New Testament', 'Old Testament']:
-        verse_records = bible.search_testament(phrase, 'nt' if testament == 'New Testament' else 'ot')
+        verse_records = bible.search_testament(phrase, 'nt' if testament == 'New Testament' else 'ot', fts)
         results_description = f"{len(verse_records)} occurrences of '{phrase}' in the {testament} ({translation})"
     else:
-        verse_records = bible.search_bible(phrase)
+        verse_records = bible.search_bible(phrase, fts)
         results_description = f"{len(verse_records)} occurrences of '{phrase}' in the {translation} Bible"
     
     context = {

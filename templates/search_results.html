@@ -5,5 +5,5 @@
     {{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}
   </a>
   <!-- TODO: bold the phrase searched -->
-  <div>{{ verse.text }}</div>
+  <div>{{ verse.text|safe }}</div>
 {% endfor %}
