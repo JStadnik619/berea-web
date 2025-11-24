@@ -4,6 +4,6 @@
   <a href="{{ url_for('reference', translation=translation|string(), book=verse.book|string(), chapter=verse.chapter|string(), verse=verse.verse|string()) }}">
     {{ verse.book }} {{ verse.chapter }}:{{ verse.verse }}
   </a>
-  <!-- TODO: bold the phrase searched -->
-  <div>{{ verse.text }}</div>
+  <!-- Filter safe to render bold hightlights -->
+  <div>{{ verse.text|safe }}</div>
 {% endfor %}
