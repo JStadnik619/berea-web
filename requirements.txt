@@ -1,3 +1,3 @@
-berea==0.1.1  # do editable install from local repo for dev
+berea==0.1.2  # do editable install from local repo for dev
 flask==3.1.2
 gunicorn==23.0.0
