@@ -81,7 +81,6 @@ def search():
 def reference(translation, book, chapter, verse):
     bible = BibleClient(translation)
     # TODO: Wrap at 50 chars for small devices
-    # TODO: Pass in verses to embolden OR embolden via Javascript
     chapter_verses = bible.get_markup_by_chapter(book, chapter)
     passage = render_markup(chapter_verses, True, 'md')
     context = {
@@ -93,5 +92,4 @@ def reference(translation, book, chapter, verse):
         'verse': verse,
     }
     # TODO: render 404 for invalid input
-    # TODO: Anchor to specific verse
     return render_template('reference_passage.html', **context)
