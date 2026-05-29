@@ -1,5 +1,7 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 <!-- TODO: Fix header to the top of the viewport -->
-<h1>{{ book }} {{ chapter }}</h1>
+<h1 class="sticky-header">{{ book }} {{ chapter }}</h1>
 <!-- TODO: translation dropdown -->
 <pre style="font-family: Arial, sans-serif; white-space: pre-wrap;">
   {{ passage|safe }}

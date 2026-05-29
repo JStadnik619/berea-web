@@ -143,10 +143,19 @@ form#search-form input[type="submit"]:hover {
     background: #1a1a1a;
     border-radius: 0.5rem;
   }
-
-  /* TODO: anchor the results description to the bottom of the search form */
-
-  /* TODO: In reference passage, prevent verse numbers from being the last characters on a wrapped line */
-
-  /* TODO: Anchor reference passage title (Book Chaper) to top of page */
 }
+
+/* TODO: anchor the results description to the bottom of the search form */
+
+/* TODO: In reference passage, prevent verse numbers from being the last characters on a wrapped line */
+
+/* Stick reference passage title (Book Chaper) to top of page */
+.sticky-header {
+  position: sticky;
+  top: 0; /* The threshold where it sticks */
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #eee; /* Essential: opaque background prevents content showing through */
+  height: 60px;
+}   
