@@ -1,11 +1,62 @@
+<!-- TODO: Fix header to the top of the viewport -->
 <h1>{{ book }} {{ chapter }}</h1>
 <!-- TODO: translation dropdown -->
-<p>
-  {% for verse in chapter_verses %}
-    {% if verse.verse|string() == verse_number|string() %}
-      <b><sup>{{ verse.verse }} </sup>{{ verse.text }}</b>
-    {% else %}
-      <sup>{{ verse.verse }} </sup>{{ verse.text }}
-    {% endif %}
-  {% endfor %}
-</p>
+<pre style="font-family: Arial, sans-serif; white-space: pre-wrap;">
+  {{ passage|safe }}
+</pre>
+
+<!-- TODO: Read full chapter button -->
+
+<script>
+  function emboldenVerses(verseRange) {
+    const pre = document.querySelector('pre');
+
+    if (!pre) return;
+
+    // Preserve original HTML
+    if (!pre.dataset.originalHtml) {
+      pre.dataset.originalHtml = pre.innerHTML;
+    }
+
+    const original = pre.dataset.originalHtml;
+
+    let startVerse;
+    let endVerse;
+
+    // Parse formats like "6:9" or "3"
+    if (verseRange.includes(':')) {
+      [startVerse, endVerse] = verseRange
+        .split(':')
+        .map(Number);
+    } else {
+      startVerse = endVerse = Number(verseRange);
+    }
+
+    let updated = original;
+
+    for (let verse = endVerse; verse >= startVerse; verse--) {
+      const regex = new RegExp(
+        `(<sup>${verse}<\\/sup>[\\s\\S]*?)(?=<sup>\\d+<\\/sup>|$)`,
+        'g'
+      );
+
+      updated = updated.replace(
+        regex,
+        `<b class="highlighted-verse">$1</b>`
+      );
+    }
+
+    pre.innerHTML = updated;
+
+    // Scroll to first highlighted verse
+    const firstHighlighted = pre.querySelector('.highlighted-verse');
+
+    if (firstHighlighted) {
+      firstHighlighted.scrollIntoView({
+        behavior: 'instant',
+        block: 'center'
+      });
+    }
+  }
+  emboldenVerses({{ verse|tojson }});
+</script>

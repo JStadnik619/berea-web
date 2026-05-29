@@ -3,6 +3,7 @@ from textwrap import dedent
 
 from flask import Flask, render_template, request
 from berea.bible import BibleClient, BibleInputError
+from berea.render import render_markup
 
 
 logger = logging.getLogger(__name__)
@@ -75,16 +76,21 @@ def search():
     return render_template('search_results.html', **context)
 
 
+# Flow: search -> verse result hyperlink -> bolded verse in context of chapter
 @app.route("/reference/<translation>/<book>/<chapter>/<verse>")
 def reference(translation, book, chapter, verse):
     bible = BibleClient(translation)
-    chapter_verses = bible.get_verses_by_chapter(book, chapter)
+    # TODO: Wrap at 50 chars for small devices
+    # TODO: Pass in verses to embolden OR embolden via Javascript
+    chapter_verses = bible.get_markup_by_chapter(book, chapter)
+    passage = render_markup(chapter_verses, True, 'md')
     context = {
         'translation': translation,
         'book': book,
         'chapter': chapter,
         'chapter_verses': chapter_verses,
-        'verse_number': verse,
+        'passage': passage,
+        'verse': verse,
     }
     # TODO: render 404 for invalid input
     # TODO: Anchor to specific verse
